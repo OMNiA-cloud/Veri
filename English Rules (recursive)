@@ -1,4 +1,4 @@
-Bu Dosya Karadeniz Teknik Üniversitesi  Veri Yapıları Dersi İçin  Hazırlanmıştır !!
+Bu Dosya Karadeniz Teknik Üniversitesi Bikgisayar  Mühendisliği Bölümü Veri Yapıları Dersi İçin Hazırlanmıştır !!
 
 from time import time
 start_time=time()
