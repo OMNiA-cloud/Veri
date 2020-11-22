@@ -1,0 +1,48 @@
+Bu Dosya Karadeniz Teknik Üniversitesi  Bilgisayar Mühendisliği Bölümü Veri Yapıları Dersi İçin Hazırlanmıştır.
+
+from time import time
+start_time=time()
+
+def fonk(parantez_ac,sayac,dizi,new_dosya):
+    
+    new_dosya = open("Hedef.txt", "a")
+    new_dosya.write(dizi[sayac])
+
+    for k in range(sayac+1, len(dizi) ):                             # dizinin kaldığı eleman sayısından devam etmesini saglamak için sayac + 1 den başlar.
+        
+        if( dizi[k][0] == "{" ):                                     # ilk eleman '{' na eşit olma durumunda çalışan koşul
+            new_dosya.write(f" {parantez_ac*'    ' }{dizi[k]}")      # parantez_ac sayisi kadar batırılan boşluk komutu                               
+            parantez_ac += 1                                         # '{' i gördüğümde parantez_ac değeri bir artırılır.
+            sayac += 1
+            
+        if( ( dizi[k][0] != "{" ) and ( dizi[k][0] != "}" ) ):
+            new_dosya.write(f" {parantez_ac*'    ' }{dizi[k]}")      
+
+        if ( dizi[k][0] == "}"  ):                                      # '}' i gördüğümde parantez_ac değeri bir azaltılır.
+            parantez_ac -= 1
+            new_dosya.write(f" {parantez_ac*'    ' }{dizi[k]}")         
+dosya = open("Kaynak.txt", "r")                                         # dosya okuma komutu ile açılır
+dizi = dosya.readlines()                                                #satır satır okunur ve diziye atılır
+print(dizi)
+print("\n")
+
+parantez_ac = 0                                                         
+sayac = 0
+
+for i in range(len(dizi)):                                              # dizinin uzunlugu kadar dönen bir for döngüsü 
+    new_dosya = open("Hedef.txt", "a")                                  # hedef dosya açılır.
+
+    if( dizi[i][0] != "{"):                                             # ilk eleman '{' na eşit olmadığı durumda çalışan koşul
+        new_dosya.write(dizi[i])                                        # hedef dosyaya yazdırma işlemi yapılır
+    
+    if ( dizi[i][0] == "{" ):                                           # ilk eleman '{' na eşit olma durumunda çalışan koşul
+
+        parantez_ac += 1                                                # '{' i gördüğümde parantez_ac değeri bir artırılır.
+        fonk(parantez_ac,sayac,dizi,new_dosya)                          # fonks,yon çağrımı
+        new_dosya.write("}")                                            # kodun ilk açılan '{' nün kapanışı
+        break                                                           # döngü kırılır.
+
+    sayac += 1                                                           # for döngüsünün kaç kez döndüğü sayılır.
+end_time = time()
+elapsed = end_time-start_time
+print(elapsed)
